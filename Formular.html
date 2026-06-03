@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html>
+<head>
+  <title>Formulář</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="ramecek"> 
+    <h1>Formulář</h1> 
+
+    <form onsubmit="alert('Formulář odeslán!'); return false;">
+
+      <label>Jméno</label>
+      <small>*Tato kolonka je povinná.</small>
+      <input type="text" placeholder="Vaše jméno" required>
+      
+
+      <label>Email</label>
+      <small>*Tato kolonka je povinná.</small>
+      <input type="email" placeholder="vas@email.cz" required>
+
+      <label>Telefonní číslo</label>
+      <input type="tel" placeholder="+420 123 456 789">
+
+      <label>Věk</label>
+      <input type="number" placeholder="Váš věk" min="0" max="120">
+
+      <button type="submit">Odeslat</button>
+
+    </form>
+  </div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bezpečný formulář</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="ramecek">
+
+    <h1>Formulář</h1>
+
+    <form id="formular">
+
+      <div class="input-group">
+        <label>Jméno</label>
+
+        <small>*Pouze písmena a mezery.</small>
+
+        <input
+          type="text"
+          id="jmeno"
+          maxlength="40"
+          required
+          pattern="[A-Za-zÀ-ž\s]+"
+          placeholder="Vaše jméno">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+
+        <small>*Zadejte platný email.</small>
+
+        <input
+          type="email"
+          id="email"
+          maxlength="100"
+          required
+          placeholder="vas@email.cz">
+      </div>
+
+      <div class="input-group">
+        <label>Telefonní číslo</label>
+
+        <small>*Pouze čísla, mezery a +.</small>
+
+        <input
+          type="tel"
+          id="telefon"
+          maxlength="20"
+          pattern="[\+0-9\s]+"
+          placeholder="+420 123 456 789">
+      </div>
+
+      <div class="input-group">
+        <label>Věk</label>
+
+        <small>*Věk od 0 do 120.</small>
+
+        <input
+          type="number"
+          id="vek"
+          min="0"
+          max="120"
+          placeholder="Váš věk">
+      </div>
+
+      <button type="submit">
+        Odeslat
+      </button>
+
+    </form>
+
+    <div id="vysledek"></div>
+
+  </div>
+
+  <script>
+
+    const form = document.getElementById("formular");
+
+    if (!form) {
+      // Form not found — nothing to attach
+    } else {
+      form.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const jmenoEl = document.getElementById("jmeno");
+        const emailEl = document.getElementById("email");
+        const telefonEl = document.getElementById("telefon");
+        const vekEl = document.getElementById("vek");
+
+        const jmeno = jmenoEl ? jmenoEl.value : "";
+        const email = emailEl ? emailEl.value : "";
+        const telefon = telefonEl ? telefonEl.value : "";
+        const vek = vekEl ? vekEl.value : "";
+
+        // odstranění nebezpečných znaků (zjednodušeně)
+        const bezpecneJmeno = String(jmeno).replace(/[<>]/g, "");
+        const bezpecnyEmail = String(email).replace(/[<>]/g, "");
+        const bezpecnyTelefon = String(telefon).replace(/[<>]/g, "");
+        const bezpecnyVek = String(vek).replace(/[<>]/g, "");
+
+        const vysledek = document.getElementById("vysledek");
+        if (!vysledek) return;
+
+        // bezpečné vložení textu
+        vysledek.textContent =
+          `Jméno: ${bezpecneJmeno}
+Email: ${bezpecnyEmail}
+Telefon: ${bezpecnyTelefon}
+Věk: ${bezpecnyVek}`;
+
+      });
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+Jsem student. Vysvětluj mi to lehčeji a lépe abych se to naučil a zapamatoval. Mluv se mnou česky. Veškerý kód komentuj.
